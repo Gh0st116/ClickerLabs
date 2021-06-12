@@ -1,0 +1,106 @@
+CREATE DATABASE clickers_lab;
+use clickers_lab;
+
+SET GLOBAL time_zone = '-3:00';
+
+# user(id_user, name, picture, username, password, points, nclicks, #id_15, #id_30, #id_60, #id_add_friend);
+CREATE TABLE `user` (
+
+    id_user BIGINT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    picture VARCHAR(255),
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(20) NOT NULL,
+    points BIGINT,
+    nclicks BIGINT,
+    id_15 BIGINT,
+    id_30 BIGINT,
+    id_60 BIGINT,
+    id_add_friend BIGINT,
+    FOREIGN KEY (id_15)
+        REFERENCES hscore15 (id_15),
+    FOREIGN KEY (id_30)
+        REFERENCES hscore30 (id_30),
+    FOREIGN KEY (id_60)
+        REFERENCES hscore60 (id_60),
+    FOREIGN KEY (id_add_friend)
+        REFERENCES add_friend (id_add_friend)
+        
+);
+
+# badge(id_badge, points_value, name, description, #id_user);
+CREATE TABLE `badge` (
+    id_badge BIGINT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
+    points_value BIGINT NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(240),
+    id_user BIGINT,
+    FOREIGN KEY (id_user)
+        REFERENCES `user` (id_user)
+);
+   
+# hscore15(id_15, player_name, player_score, time, average);
+CREATE TABLE `hscore15` (
+
+    id_15 BIGINT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
+    player_name VARCHAR(50),
+    player_score BIGINT,
+    time FLOAT(8 , 3 ),
+    average FLOAT(8 , 3 )
+    
+);
+   
+# hscore30(id_30, player_name, player_score, time, average);
+CREATE TABLE `hscore30` (
+
+    id_30 BIGINT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
+    player_name VARCHAR(50),
+    player_score BIGINT,
+    time FLOAT(8 , 3 ),
+    average FLOAT(8 , 3 )
+    
+);
+   
+# hscore60(id_60, player_name, player_score, time, average);
+CREATE TABLE `hscore60` (
+
+    id_60 BIGINT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
+    player_name VARCHAR(50),
+    player_score BIGINT,
+    time FLOAT(8 , 3 ),
+    average FLOAT(8 , 3 )
+    
+);
+
+# friend(id_friend, name, fpoints, picture, score15, score30, score60, pos15, pos30, pos60);
+CREATE TABLE `friend` (
+
+    id_friend BIGINT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),
+    fpoints BIGINT NOT NULL,
+    picture VARCHAR(255),
+    score15 BIGINT,
+    score30 BIGINT,
+    score60 BIGINT,
+    pos15 BIGINT UNIQUE,
+    pos30 BIGINT UNIQUE,
+    pos60 BIGINT UNIQUE
+    
+);
+
+
+# add_friend(id_addFriend, #id_user, #id_friend, addDate);
+CREATE TABLE `add_friend` (
+
+    id_add_friend BIGINT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
+    id_user BIGINT,
+    id_friend BIGINT,
+    add_date DATE,
+    
+    FOREIGN KEY (id_friend)
+        REFERENCES `friend` (id_friend),
+    FOREIGN KEY (id_user)
+        REFERENCES `user` (id_user)
+        
+);
+   
