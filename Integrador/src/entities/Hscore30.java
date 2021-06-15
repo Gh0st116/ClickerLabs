@@ -11,6 +11,7 @@ public class Hscore30 extends Hscore {
 	private List<User> user;
 	
 	
+	
 	// construtor vazio
 	public Hscore30() {
 		super();

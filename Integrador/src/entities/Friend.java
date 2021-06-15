@@ -5,14 +5,23 @@ package entities;
 public class Friend {
 
 	private Long idFriend;
+	
 	private String name;
+	
 	private Long fpoints;
+	
 	private String picture;
+	
 	private Long score15;
+	
 	private Long score30;
+	
 	private Long score60;
+	
 	private Long pos15;
+	
 	private Long pos30;
+	
 	private Long pos60;
 
 	

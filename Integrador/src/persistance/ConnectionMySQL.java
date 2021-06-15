@@ -7,10 +7,15 @@ import java.sql.SQLException;
 public class ConnectionMySQL {
 	
 	private String ip;
+	
 	private String port;
+	
 	private String login;
+	
 	private String password;
+	
 	private String nameDB;
+	
 	
 	private Connection connection;
 	

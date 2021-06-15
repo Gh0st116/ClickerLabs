@@ -3,19 +3,28 @@ package entities;
 public class User implements Authenticate {
 
 	private long idUser;
+	
 	private String name;
+	
 	private long nclicks;
+	
 	private long points;
+	
 	private String username;
+	
 	private String password;
+	
 	private String picture;
 
 	
 	// relacionamento 1:N com hscore15, 30 e 60
 	private long id15;
+	
 	private long id30;
+	
 	private long id60;
 
+	
 	
 	// Construtor vazio
 	public User() {

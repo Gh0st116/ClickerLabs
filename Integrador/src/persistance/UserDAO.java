@@ -10,6 +10,7 @@ import java.util.List;
 import entities.User;
 
 public class UserDAO {
+	
 
 	private ConnectionMySQL connection;
 	

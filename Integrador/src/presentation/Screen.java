@@ -12,6 +12,7 @@ public class Screen {
 	
 	public static boolean checkPassword (String a, String b) {
 		
+		
 		if (a.equals(b)) {
 			
 			return true;
@@ -23,6 +24,7 @@ public class Screen {
 			return false;
 			
 		}
+		
 		
 	}
 	

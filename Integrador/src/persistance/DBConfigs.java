@@ -3,6 +3,7 @@ package persistance;
 public class DBConfigs {
 	
 	
+	
 	public static final String IP = "localhost";
 	
 	public static final String PORT = "3306";
@@ -13,5 +14,6 @@ public class DBConfigs {
 	
 	public static final String NAME_DB = "clickers_lab";
 
+	
 	
 }

@@ -11,6 +11,7 @@ public class Badge {
 	private User user;
 	
 	
+	
 	// Construtor vazio
 	public Badge() {
 		this.idBadge = null;

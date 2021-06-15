@@ -264,6 +264,7 @@ public class Hscore30DAO {
 	
 	
 	
+	// procurando id pelo username
 	public long searchIdByUsername(String username) {
 		
 		//abrir conexao

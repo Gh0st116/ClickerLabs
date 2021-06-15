@@ -47,6 +47,7 @@ public class Hscore15 extends Hscore {
 	}
 	
 	
+	
 	// getters e setters
 	public Long getId15() {
 		return id15;

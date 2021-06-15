@@ -15,6 +15,7 @@ public class AddFriend {
 	// relacionamento 1:N com Friend
 	private Friend friend;
 
+	
 
 	// construtor vazio
 	public AddFriend() {
