@@ -1,7 +1,6 @@
 CREATE DATABASE clickers_lab;
 use clickers_lab;
 
-SET GLOBAL time_zone = '-3:00';
 
 # user(id_user, name, picture, username, password, points, nclicks, #id_15, #id_30, #id_60, #id_add_friend);
 CREATE TABLE `user` (
@@ -17,15 +16,16 @@ CREATE TABLE `user` (
     id_30 BIGINT,
     id_60 BIGINT,
     id_add_friend BIGINT,
-    FOREIGN KEY (id_15)
-        REFERENCES hscore15 (id_15),
+        FOREIGN KEY (id_15)
+        REFERENCES `hscore15` (id_15),
     FOREIGN KEY (id_30)
-        REFERENCES hscore30 (id_30),
+        REFERENCES `hscore30` (id_30),
     FOREIGN KEY (id_60)
-        REFERENCES hscore60 (id_60),
+        REFERENCES `hscore60` (id_60),
     FOREIGN KEY (id_add_friend)
-        REFERENCES add_friend (id_add_friend)
-        
+        REFERENCES `add_friend` (id_add_friend)
+
+      
 );
 
 # badge(id_badge, points_value, name, description, #id_user);
@@ -43,7 +43,7 @@ CREATE TABLE `badge` (
 CREATE TABLE `hscore15` (
 
     id_15 BIGINT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
-    player_name VARCHAR(50),
+    player_username VARCHAR(50) UNIQUE,
     player_score BIGINT,
     time FLOAT(8 , 3 ),
     average FLOAT(8 , 3 )
@@ -54,7 +54,7 @@ CREATE TABLE `hscore15` (
 CREATE TABLE `hscore30` (
 
     id_30 BIGINT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
-    player_name VARCHAR(50),
+    player_username VARCHAR(50) UNIQUE,
     player_score BIGINT,
     time FLOAT(8 , 3 ),
     average FLOAT(8 , 3 )
@@ -65,7 +65,7 @@ CREATE TABLE `hscore30` (
 CREATE TABLE `hscore60` (
 
     id_60 BIGINT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
-    player_name VARCHAR(50),
+    player_username VARCHAR(50) UNIQUE,
     player_score BIGINT,
     time FLOAT(8 , 3 ),
     average FLOAT(8 , 3 )
@@ -98,9 +98,9 @@ CREATE TABLE `add_friend` (
     add_date DATE,
     
     FOREIGN KEY (id_friend)
-        REFERENCES `friend` (id_friend),
-    FOREIGN KEY (id_user)
+        REFERENCES `friend` (id_friend), 
+	FOREIGN KEY (id_user)
         REFERENCES `user` (id_user)
-        
+   
 );
    
