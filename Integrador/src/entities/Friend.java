@@ -25,6 +25,7 @@ public class Friend {
 	private Long pos60;
 
 	
+	
 	// Construtor vazio
 	public Friend() {
 		this.idFriend = null;

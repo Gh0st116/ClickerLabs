@@ -11,7 +11,7 @@ import entities.Friend;
 
 public class FriendDAO {
 
-	
+
 	private ConnectionMySQL connection;
 	
 	

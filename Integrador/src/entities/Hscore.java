@@ -76,7 +76,7 @@ public class Hscore {
 		this.playerScore = player_score;
 		
 	}
-
+	
 	public double getTime() {
 		
 		return time;

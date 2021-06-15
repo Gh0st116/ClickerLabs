@@ -16,7 +16,7 @@ public class User implements Authenticate {
 	
 	private String picture;
 
-	
+
 	// relacionamento 1:N com hscore15, 30 e 60
 	private long id15;
 	

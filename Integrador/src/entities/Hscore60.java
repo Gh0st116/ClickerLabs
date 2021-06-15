@@ -21,7 +21,7 @@ public class Hscore60 extends Hscore {
 		
 	}
 
-	
+
 	
 	// construtor com parametros
 	public Hscore60(String player_name, Long player_score, double time, double averageCps, Long id60, List<User> user) {

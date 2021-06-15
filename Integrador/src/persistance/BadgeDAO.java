@@ -276,7 +276,7 @@ public class BadgeDAO {
 		return listBadge;
 	}
 	
-	
+
 	
 	// buscar id do badge pelo seu nome
 	public long searchIdByBadgeName(String badgename) {

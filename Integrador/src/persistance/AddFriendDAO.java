@@ -28,7 +28,7 @@ public class AddFriendDAO {
 		
 	}
 	
-	
+
 	
 	//metodo adicionar
 	public AddFriend add(AddFriend addFriend) {

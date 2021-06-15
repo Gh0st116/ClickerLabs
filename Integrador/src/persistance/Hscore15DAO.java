@@ -262,7 +262,7 @@ public class Hscore15DAO {
 		return list15;
 	}
 	
-	
+
 	
 	// procurando id pelo username
 	public long searchIdByUsername(String username) {

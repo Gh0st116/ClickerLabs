@@ -2,7 +2,7 @@ package persistance;
 
 public class DBConfigs {
 	
-	
+
 	
 	public static final String IP = "localhost";
 	

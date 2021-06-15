@@ -10,7 +10,7 @@ public class Hscore30 extends Hscore {
 	// relacionamento 1:N com User
 	private List<User> user;
 	
-	
+
 	
 	// construtor vazio
 	public Hscore30() {
