@@ -40,7 +40,7 @@ public class ConnectionMySQL {
 			
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-			String address = "jdbc:mysql://" + this.ip + ":" + this.port + "/" + this.nameDB;
+			String address = "jdbc:mysql://" + this.ip + ":" + this.port + "/" + this.nameDB + "?serverTimezone=UTC";
 			
 			this.connection = DriverManager.getConnection(address, this.login, this.password);
 			
@@ -58,7 +58,7 @@ public class ConnectionMySQL {
 		
 		try {
 			
-			if (!this.connection.isClosed() || this.connection == null) {
+			if (this.connection != null) {
 				
 				this.connection.close();
 			}

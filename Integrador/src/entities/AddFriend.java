@@ -6,7 +6,7 @@ public class AddFriend {
 
 	// classe para relacionamento N:N entre User e Friend
 	
-	private long idAddFriend;
+	private Long idAddFriend;
 	private LocalDateTime addDate;
 	
 	// relacionamento 1:N com User
@@ -18,7 +18,7 @@ public class AddFriend {
 
 	// construtor vazio
 	public AddFriend() {
-		this.idAddFriend = 0;
+		this.idAddFriend = null;
 		this.addDate = LocalDateTime.now();
 		this.user = new User();
 		this.friend = new Friend();
@@ -26,7 +26,7 @@ public class AddFriend {
 
 	
 	// construtor com parametros
-	public AddFriend(long idAddFriend, LocalDateTime addDate, User user, Friend friend) {
+	public AddFriend(Long idAddFriend, LocalDateTime addDate, User user, Friend friend) {
 		this.idAddFriend = idAddFriend;
 		this.addDate = addDate;
 		this.user = user;
@@ -42,11 +42,11 @@ public class AddFriend {
 
 	
 	// getters e setters
-	public long getIdAddFriend() {
+	public Long getIdAddFriend() {
 		return idAddFriend;
 	}
 
-	public void setIdAddFriend(long idAddFriend) {
+	public void setIdAddFriend(Long idAddFriend) {
 		this.idAddFriend = idAddFriend;
 	}
 

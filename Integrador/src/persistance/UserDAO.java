@@ -26,12 +26,12 @@ public class UserDAO {
 	
 	//metodo adicionar
 	public User add(User user) {
-
+				
 		//abrindo conexao
 		this.connection.openConnection();
 		
 		//registrando no bd
-		String sql = "INSERT INTO user(name, picture, username, password, points, nclicks, id_15, id_30, id_60) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		String sql = "INSERT INTO user(name, picture, username, password) VALUES(?, ?, ?, ?);";
 		
 		User u = null;
 		
@@ -48,17 +48,7 @@ public class UserDAO {
 			st.setString(3, user.getUsername());
 			
 			st.setString(4, user.getPassword());
-			
-			st.setLong(5, user.getPoints());
-			
-			st.setLong(6, user.getNclicks());
-			
-			st.setLong(7, user.getId15());
-			
-			st.setLong(8, user.getId30());
-			
-			st.setLong(9, user.getId60());
-						
+
 			//executando a sql
 			st.executeUpdate();
 			
@@ -97,8 +87,7 @@ public class UserDAO {
 		this.connection.openConnection();
 		
 		//editar no bd
-		String sql = "UPDATE user SET name = ?, username = ?, password = ?, picture = ?, points = ?, nclicks = ?, id_15 = ?, id_30 = ?,"
-				+ " id_60 = ? WHERE id_user = ?;"; 
+		String sql = "UPDATE user SET name = ?, username = ?, password = ?, picture = ?, points = ?, nclicks = ? WHERE id_user = ?;"; 
 		
 		try {
 			
@@ -117,13 +106,7 @@ public class UserDAO {
 			
 			st.setLong(6, user.getNclicks());
 			
-			st.setLong(7, user.getId15());
-			
-			st.setLong(8, user.getId30());
-			
-			st.setLong(9, user.getId60());
-			
-			st.setLong(10, user.getIdUser());
+			st.setLong(7, user.getIdUser());
 			
 			//executando sql
 			st.executeUpdate();
@@ -227,26 +210,6 @@ public class UserDAO {
 				
 				user.setId60(rs.getLong("id_60"));
 				
-//				//preenchendo os objetos hscore15, 30 e 60 procurando pelo id do user
-//				Hscore15DAO hscore15DAO = new Hscore15DAO();
-//				
-//				Hscore15 hscore15 = hscore15DAO.searchById(rs.getLong("id_user"));
-//				
-//				user.setScore15(hscore15);
-//				
-//				
-//				Hscore30DAO hscore30DAO = new Hscore30DAO();
-//				
-//				Hscore30 hscore30 = hscore30DAO.searchById(rs.getLong("id_user"));
-//				
-//				user.setScore30(hscore30);
-//				
-//				
-//				Hscore60DAO hscore60DAO = new Hscore60DAO();
-//				
-//				Hscore60 hscore60 = hscore60DAO.searchById(rs.getLong("id_user"));
-//				
-//				user.setScore60(hscore60);
 				
 			}
 						
@@ -311,27 +274,6 @@ public class UserDAO {
 				
 				user.setId60(rs.getLong("id_60"));
 				
-//				//preenchendo os objetos hscore15, 30 e 60 procurando pelo id do user
-//				Hscore15DAO hscore15DAO = new Hscore15DAO();
-//				
-//				Hscore15 hscore15 = hscore15DAO.searchById(rs.getLong("id_user"));
-//				
-//				user.setScore15(hscore15);
-//				
-//				
-//				Hscore30DAO hscore30DAO = new Hscore30DAO();
-//				
-//				Hscore30 hscore30 = hscore30DAO.searchById(rs.getLong("id_user"));
-//				
-//				user.setScore30(hscore30);
-//				
-//				
-//				Hscore60DAO hscore60DAO = new Hscore60DAO();
-//				
-//				Hscore60 hscore60 = hscore60DAO.searchById(rs.getLong("id_user"));
-//				
-//				user.setScore60(hscore60);
-//				
 								
 				//adicionando user na lista
 				listUser.add(user);
@@ -352,6 +294,46 @@ public class UserDAO {
 		return listUser;
 	}
 	
+	
+	public long searchIdByUsername(String username) {
+		
+		//abrir conexao
+		this.connection.openConnection();
+		
+		//declarando id que sera retornado
+		long id = 0;
+
+		//buscando no bd
+		String sql = "SELECT * FROM user WHERE username = ?;";
+		
+		try {
+			
+			PreparedStatement st = connection.getConnection().prepareStatement(sql);
+			
+			//substituindo interrogacoes
+			st.setString(1, username);
+			
+			ResultSet rs = st.executeQuery();
+			
+			//next pula de linha em linha para ver se ela existe
+			if (rs.next() == true) {
+				
+				id = rs.getLong("id_user");
+				
+			}
+						
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			//fechar conexao
+			this.connection.closeConnection();
+		}
+		
+		return id;
+	}
 	
 	
 	

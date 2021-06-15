@@ -31,7 +31,7 @@ public class Hscore15DAO {
 		this.connection.openConnection();
 		
 		//registrando no bd
-		String sql = "INSERT INTO hscore15(player_name, player_score, time, average) VALUES(?, ?, ?, ?);";
+		String sql = "INSERT INTO hscore15(player_username, player_score, time, average) VALUES(?, ?, ?, ?);";
 		
 		Hscore15 h15 = null;
 		
@@ -86,7 +86,7 @@ public class Hscore15DAO {
 		this.connection.openConnection();
 		
 		//editar no bd
-		String sql = "UPDATE hscore15 SET player_name = ?, player_score = ?, time = ?, average = ? WHERE id_15 = ?;"; 
+		String sql = "UPDATE hscore15 SET player_username = ?, player_score = ?, time = ?, average = ? WHERE id_15 = ?;"; 
 		
 		try {
 			
@@ -184,7 +184,7 @@ public class Hscore15DAO {
 				//atribuindo colunas do rs a atributos do hscore15
 				hscore15.setId15(rs.getLong("id_15"));
 				
-				hscore15.setPlayerName(rs.getString("player_name"));
+				hscore15.setPlayerName(rs.getString("player_username"));
 				
 				hscore15.setPlayerScore(rs.getLong("player_score"));
 				
@@ -235,7 +235,7 @@ public class Hscore15DAO {
 				//atribuindo colunas do rs a atributos do hscore15
 				hscore15.setId15(rs.getLong("id_15"));
 				
-				hscore15.setPlayerName(rs.getString("player_name"));
+				hscore15.setPlayerName(rs.getString("player_username"));
 				
 				hscore15.setPlayerScore(rs.getLong("player_score"));
 				
@@ -262,5 +262,49 @@ public class Hscore15DAO {
 		return list15;
 	}
 	
+	
+	
+	public long searchIdByUsername(String username) {
+		
+		//abrir conexao
+		this.connection.openConnection();
+		
+		//declarando hscore15 que sera retornado
+		long id = 0;
+
+		//buscando no bd
+		String sql = "SELECT id_15 FROM hscore15 WHERE player_username = ?;";
+		
+		try {
+			
+			PreparedStatement st = connection.getConnection().prepareStatement(sql);
+			
+			//substituindo interrogacoes
+			st.setString(1, username);
+			
+			ResultSet rs = st.executeQuery();
+			
+			//converter o resultSet em um ubjeto Hscore15
+			//next pula de linha em linha para ver se ela existe
+			if (rs.next() == true) {
+						
+				//atribuindo colunas do rs a atributos do hscore15
+				id = rs.getLong("id_15");
+				
+			}
+						
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			//fechar conexao
+			this.connection.closeConnection();
+		}
+		
+		return id;
+	}
+
 	
 }

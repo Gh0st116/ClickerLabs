@@ -4,46 +4,46 @@ package entities;
 
 public class Friend {
 
-	private long idFriend;
+	private Long idFriend;
 	private String name;
-	private long fpoints;
+	private Long fpoints;
 	private String picture;
-	private long score15;
-	private long score30;
-	private long score60;
-	private long pos15;
-	private long pos30;
-	private long pos60;
+	private Long score15;
+	private Long score30;
+	private Long score60;
+	private Long pos15;
+	private Long pos30;
+	private Long pos60;
 
 	
 	// Construtor vazio
 	public Friend() {
-		this.idFriend = 0;
+		this.idFriend = null;
 		
 		this.name = "";
 		
-		this.fpoints = 0;
+		this.fpoints = null;
 		
 		this.picture = "";
 		
-		this.score15 = 0;
+		this.score15 = null;
 		
-		this.score30 = 0;
+		this.score30 = null;
 		
-		this.score60 = 0;
+		this.score60 = null;
 		
-		this.pos15 = 0;
+		this.pos15 = null;
 		
-		this.pos30 = 0;
+		this.pos30 = null;
 		
-		this.pos60 = 0;
+		this.pos60 = null;
 				
 	}
 	
 
 	// Construtor com parametro
-	public Friend(long id_friend, String name, long fpoints, String picture, long score15, long score30, long score60,
-			long pos15, long pos30, long pos60) {
+	public Friend(Long id_friend, String name, Long fpoints, String picture, Long score15, Long score30, Long score60,
+			Long pos15, Long pos30, Long pos60) {
 		this.idFriend = id_friend;
 		
 		this.name = name;
@@ -77,11 +77,11 @@ public class Friend {
 
 	
 	// getters e setters
-	public long getIdFriend() {
+	public Long getIdFriend() {
 		return idFriend;
 	}
 
-	public void setIdFriend(long id_friend) {
+	public void setIdFriend(Long id_friend) {
 		this.idFriend = id_friend;
 	}
 
@@ -93,11 +93,11 @@ public class Friend {
 		this.name = name;
 	}
 
-	public long getFpoints() {
+	public Long getFpoints() {
 		return fpoints;
 	}
 
-	public void setFpoints(long fpoints) {
+	public void setFpoints(Long fpoints) {
 		this.fpoints = fpoints;
 	}
 
@@ -109,51 +109,51 @@ public class Friend {
 		this.picture = picture;
 	}
 
-	public long getScore15() {
+	public Long getScore15() {
 		return score15;
 	}
 
-	public void setScore15(long score15) {
+	public void setScore15(Long score15) {
 		this.score15 = score15;
 	}
 
-	public long getScore30() {
+	public Long getScore30() {
 		return score30;
 	}
 
-	public void setScore30(long score30) {
+	public void setScore30(Long score30) {
 		this.score30 = score30;
 	}
 
-	public long getScore60() {
+	public Long getScore60() {
 		return score60;
 	}
 
-	public void setScore60(long score60) {
+	public void setScore60(Long score60) {
 		this.score60 = score60;
 	}
 
-	public long getPos15() {
+	public Long getPos15() {
 		return pos15;
 	}
 
-	public void setPos15(long pos15) {
+	public void setPos15(Long pos15) {
 		this.pos15 = pos15;
 	}
 
-	public long getPos30() {
+	public Long getPos30() {
 		return pos30;
 	}
 
-	public void setPos30(long pos30) {
+	public void setPos30(Long pos30) {
 		this.pos30 = pos30;
 	}
 
-	public long getPos60() {
+	public Long getPos60() {
 		return pos60;
 	}
 
-	public void setPos60(long pos60) {
+	public void setPos60(Long pos60) {
 		this.pos60 = pos60;
 	}
 

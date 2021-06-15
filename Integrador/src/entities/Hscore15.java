@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Hscore15 extends Hscore {
 
-	private long id15;
+	private Long id15;
 	
 	// relacionamento 1:N com User
 	private List<User> user;
@@ -15,7 +15,7 @@ public class Hscore15 extends Hscore {
 	public Hscore15() {
 		super();
 		
-		this.id15 = 0;
+		this.id15 = null;
 		
 		this.user = new ArrayList<User>();
 		
@@ -23,8 +23,8 @@ public class Hscore15 extends Hscore {
 
 	
 	// construtor com parametros
-	public Hscore15(String player_name, long player_score, double time, double averageCps, long id15, List<User> user) {
-		this.playerName = player_name;
+	public Hscore15(String player_name, Long player_score, double time, double averageCps, Long id15, List<User> user) {
+		this.playerUsername = player_name;
 		
 		this.playerScore = player_score;
 		
@@ -42,17 +42,17 @@ public class Hscore15 extends Hscore {
 	// metodo toString
 	@Override
 	public String toString() {
-		return "Hscore15 [playerName = " + playerName + ", playerScore = " + playerScore + ", time = " + time + ", averageCps = "
+		return "Hscore15 [playerUsername = " + playerUsername + ", playerScore = " + playerScore + ", time = " + time + ", averageCps = "
 				+ averageCps +", id15 = " + id15 + ", user = " + user + "]";
 	}
 	
 	
 	// getters e setters
-	public long getId15() {
+	public Long getId15() {
 		return id15;
 	}
 
-	public void setId15(long id15) {
+	public void setId15(Long id15) {
 		this.id15 = id15;
 	}
 

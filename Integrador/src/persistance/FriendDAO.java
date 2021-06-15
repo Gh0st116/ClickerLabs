@@ -175,7 +175,7 @@ public class FriendDAO {
 	
 	
 	//metodo buscar por ID
-	public Friend searchById(long idFriend) {
+	public Friend searchById(Long idFriend) {
 		
 		//abrir conexao
 		this.connection.openConnection();

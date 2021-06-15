@@ -10,10 +10,7 @@ public class User implements Authenticate {
 	private String password;
 	private String picture;
 
-//	private Hscore15 score15;
-//	private Hscore30 score30;
-//	private Hscore60 score60;
-
+	
 	// relacionamento 1:N com hscore15, 30 e 60
 	private long id15;
 	private long id30;
@@ -35,12 +32,6 @@ public class User implements Authenticate {
 		this.password = "";
 
 		this.picture = "";
-
-//		this.score15 = null;
-//		
-//		this.score30 = null;
-//		
-//		this.score60 = null;
 
 		this.id15 = 0;
 
@@ -67,12 +58,6 @@ public class User implements Authenticate {
 		this.password = password;
 
 		this.picture = picture;
-
-//		this.score15 = score15;
-//		
-//		this.score30 = score30;
-//		
-//		this.score60 = score60;
 
 		this.id15 = id15;
 
@@ -159,30 +144,6 @@ public class User implements Authenticate {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-
-//	public Hscore15 getScore15() {
-//		return score15;
-//	}
-//
-//	public void setScore15(Hscore15 score15) {
-//		this.score15 = score15;
-//	}
-//
-//	public Hscore30 getScore30() {
-//		return score30;
-//	}
-//
-//	public void setScore30(Hscore30 score30) {
-//		this.score30 = score30;
-//	}
-//
-//	public Hscore60 getScore60() {
-//		return score60;
-//	}
-//
-//	public void setScore60(Hscore60 score60) {
-//		this.score60 = score60;
-//	}
 
 	public long getId15() {
 		return id15;

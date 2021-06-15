@@ -2,8 +2,8 @@ package entities;
 
 public class Badge {
 
-	private long idBadge;
-	private long pointsValue;
+	private Long idBadge;
+	private Long pointsValue;
 	private String name;
 	private String description;
 	
@@ -13,9 +13,9 @@ public class Badge {
 	
 	// Construtor vazio
 	public Badge() {
-		this.idBadge = 0;
+		this.idBadge = null;
 		
-		this.pointsValue = 0;
+		this.pointsValue = null;
 		
 		this.name = "";
 		
@@ -27,7 +27,7 @@ public class Badge {
 
 	
 	// Construtor com parametros
-	public Badge(long id_badge, long pointsValue, String name, String description, User user) {
+	public Badge(Long id_badge, Long pointsValue, String name, String description, User user) {
 		this.idBadge = id_badge;
 		
 		this.pointsValue = pointsValue;
@@ -50,19 +50,19 @@ public class Badge {
 	
 
 	// getters e setters
-	public long getIdBadge() {
+	public Long getIdBadge() {
 		return idBadge;
 	}
 
-	public void setIdBadge(long id_badge) {
+	public void setIdBadge(Long id_badge) {
 		this.idBadge = id_badge;
 	}
 
-	public long getPointsValue() {
+	public Long getPointsValue() {
 		return pointsValue;
 	}
 
-	public void setPointsValue(long pointsValue) {
+	public void setPointsValue(Long pointsValue) {
 		this.pointsValue = pointsValue;
 	}
 
