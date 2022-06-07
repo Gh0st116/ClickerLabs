@@ -2,76 +2,45 @@ package entities;
 
 public class User implements Authenticate {
 
-	private long idUser;
-	
-	private String name;
-	
-	private long nclicks;
-	
-	private long points;
-	
-	private String username;
-	
-	private String password;
-	
+	private long idUser;	
+	private String name;	
+	private long nclicks;	
+	private long points;	
+	private String username;	
+	private String password;	
 	private String picture;
 
-
 	// relacionamento 1:N com hscore15, 30 e 60
-	private long id15;
-	
-	private long id30;
-	
+	private long id15;	
+	private long id30;	
 	private long id60;
-
-	
 	
 	// Construtor vazio
 	public User() {
 		this.idUser = 0;
-
 		this.name = "";
-
 		this.nclicks = 0;
-
 		this.points = 0;
-
 		this.username = "";
-
 		this.password = "";
-
 		this.picture = "";
-
 		this.id15 = 0;
-
 		this.id30 = 0;
-
 		this.id60 = 0;
 	}
-
 	
 	// Construtor com parametros
 	public User(long id_user, String name, long nclicks, long points, String username, String password, String picture,
 			Hscore15 score15, Hscore30 score30, Hscore60 score60, long id15, long id30, long id60) {
-
 		this.idUser = id_user;
-
 		this.name = name;
-
 		this.nclicks = nclicks;
-
 		this.points = points;
-
 		this.username = username;
-
 		this.password = password;
-
 		this.picture = picture;
-
 		this.id15 = id15;
-
 		this.id30 = id30;
-
 		this.id60 = id60;
 	}
 
@@ -85,15 +54,10 @@ public class User implements Authenticate {
 
 	@Override
 	public boolean authPassword(String password) {
-
 		if (this.password.equals(password)) {
-
 			return true;
-
 		} else {
-
 			return false;
-
 		}
 	}
 
@@ -177,5 +141,4 @@ public class User implements Authenticate {
 	public void setId60(long id60) {
 		this.id60 = id60;
 	}
-
 }
