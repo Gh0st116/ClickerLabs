@@ -9,36 +9,23 @@ public class Hscore60 extends Hscore {
 	
 	// relacionamento 1:N com User
 	private List<User> user;
-
 	
 	// construtor vazio
 	public Hscore60() {
-		super();
-		
-		this.id60 = null;
-		
-		this.user = new ArrayList<User>();
-		
+		super();		
+		this.id60 = null;		
+		this.user = new ArrayList<User>();		
 	}
-
-
 	
 	// construtor com parametros
 	public Hscore60(String player_name, Long player_score, double time, double averageCps, Long id60, List<User> user) {
-		this.playerUsername = player_name;
-		
-		this.playerScore = player_score;
-		
-		this.time = time;
-		
-		this.averageCps = averageCps;
-		
-		this.id60 = id60;
-		
+		this.playerUsername = player_name;		
+		this.playerScore = player_score;		
+		this.time = time;		
+		this.averageCps = averageCps;		
+		this.id60 = id60;		
 		this.user = user;
-		
 	}
-
 	
 	// metodo toString
 	@Override
@@ -46,7 +33,6 @@ public class Hscore60 extends Hscore {
 		return "Hscore15 [playerUserame = " + playerUsername + ", playerScore = " + playerScore + ", time = " + time + ", averageCps = "
 				+ averageCps +", id60 = " + id60 + ", user = " + user + "]";
 	}
-
 	
 	// getters e setters
 	public Long getId60() {
@@ -64,5 +50,4 @@ public class Hscore60 extends Hscore {
 	public void setUser(List<User> user) {
 		this.user = user;
 	}
-
 }
