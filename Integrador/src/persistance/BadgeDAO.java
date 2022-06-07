@@ -12,18 +12,12 @@ import entities.User;
 
 public class BadgeDAO {
 
-	private ConnectionMySQL connection;
-	
-	
+	private ConnectionMySQL connection;	
 	
 	//construtor da classe
-	public BadgeDAO() {
-		
-		this.connection = new ConnectionMySQL(DBConfigs.IP, DBConfigs.PORT, DBConfigs.LOGIN, DBConfigs.PASSWORD, DBConfigs.NAME_DB);
-		
+	public BadgeDAO() {		
+		this.connection = new ConnectionMySQL(DBConfigs.IP, DBConfigs.PORT, DBConfigs.LOGIN, DBConfigs.PASSWORD, DBConfigs.NAME_DB);		
 	}
-	
-	
 	
 	//metodo adicionar
 	public Badge add(Badge badge) {
@@ -32,53 +26,39 @@ public class BadgeDAO {
 		this.connection.openConnection();
 		
 		//registrando no bd
-		String sql = "INSERT INTO badge(points_value, name, description, id_user) VALUES(?, ?, ?, ?);";
+		String sql = "INSERT INTO badge(points_value, name, description, id_user) VALUES(?, ?, ?, ?);";		
+		Badge b = null;	
 		
-		Badge b = null;
-		
-		try {
-			
+		try {			
 			//preparedStatement prepara o comando do sql antes de executar
 			PreparedStatement st = this.connection.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
 			//substituindo interrogacoes
-			st.setLong(1, badge.getPointsValue());
-			
-			st.setString(2, badge.getName());
-			
-			st.setString(3, badge.getDescription());
-			
-			st.setLong(4, badge.getUser().getIdUser());
-			
+			st.setLong(1, badge.getPointsValue());			
+			st.setString(2, badge.getName());			
+			st.setString(3, badge.getDescription());			
+			st.setLong(4, badge.getUser().getIdUser());			
 			
 			ResultSet rs = st.getGeneratedKeys();
 			
-			if (rs.next()) {
-				
-				b = this.searchById(rs.getLong(1));
-				
+			if (rs.next()) {				
+				b = this.searchById(rs.getLong(1));				
 				System.out.println(b.toString());
-			}
+			}			
 			
-			
-			//executando a sql
+			//executando sql
 			st.executeUpdate();
 			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		
+		} catch (SQLException e) {			
+			e.printStackTrace();		
 		} finally {
 		
 			//fechando conexao
 			this.connection.closeConnection();
 		}
 		
-		return b;
-		
-	}
-	
-	
+		return b;		
+	}	
 	
 	//metodo editar
 	public void edit(Badge badge) {
@@ -89,37 +69,27 @@ public class BadgeDAO {
 		//editar no bd
 		String sql = "UPDATE badge SET points_value = ?, name = ?, description = ?, id_user = ? WHERE id_badge = ?;"; 
 		
-		try {
-			
+		try {			
 			PreparedStatement st = connection.getConnection().prepareStatement(sql);
 			
 			//substituindo interrogacoes
-			st.setLong(1, badge.getPointsValue());
-			
-			st.setString(2, badge.getName());
-			
-			st.setString(3, badge.getDescription());
-			
-			st.setLong(4, badge.getUser().getIdUser());
-			
+			st.setLong(1, badge.getPointsValue());			
+			st.setString(2, badge.getName());			
+			st.setString(3, badge.getDescription());			
+			st.setLong(4, badge.getUser().getIdUser());			
 			st.setLong(5, badge.getIdBadge());
 						
 			//executando sql
 			st.executeUpdate();
 			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
+		} catch (SQLException e) {			
+			e.printStackTrace();			
 		} finally {
 			
 			//fechando conexao
-			this.connection.closeConnection();
-			
-		}
-			
-	}
-	
+			this.connection.closeConnection();			
+		}			
+	}	
 	
 	//metodo excluir
 	public void delete(Badge badge) {
@@ -130,8 +100,7 @@ public class BadgeDAO {
 		//deletando do bd
 		String sql = "DELETE FROM badge WHERE id_badge = ?";
 		
-		try {
-			
+		try {			
 			PreparedStatement st = connection.getConnection().prepareStatement(sql);
 			
 			//substituindo interrogacoes
@@ -141,19 +110,13 @@ public class BadgeDAO {
 			st.executeUpdate();
 			
 		} catch (SQLException e) {
-
-			e.printStackTrace();
-			
+			e.printStackTrace();			
 		} finally {
 			
 			//fechando conexao
-			this.connection.closeConnection();
-			
-		}
-		
-	}
-	
-	
+			this.connection.closeConnection();			
+		}		
+	}	
 	
 	//metodo buscar por ID
 	public Badge searchById(Long idBadge) {
@@ -167,8 +130,7 @@ public class BadgeDAO {
 		//buscando no bd
 		String sql = "SELECT * FROM badge WHERE id_badge = ?;";
 		
-		try {
-			
+		try {			
 			PreparedStatement st = connection.getConnection().prepareStatement(sql);
 			
 			//substituindo interrogacoes
@@ -178,33 +140,22 @@ public class BadgeDAO {
 			
 			//converter o resultSet em um ubjeto Badge
 			//next pula de linha em linha para ver se ela existe
-			if (rs.next() == true) {
-				
+			if (rs.next() == true) {				
 				badge = new Badge();
 				
 				//atribuindo colunas do rs a atributos do badge
-				badge.setIdBadge(rs.getLong("id_badge"));
-				
-				badge.setName(rs.getString("name"));
-				
-				badge.setPointsValue(rs.getLong("points_value"));
-				
-				badge.setDescription(rs.getString("description"));
-				
+				badge.setIdBadge(rs.getLong("id_badge"));				
+				badge.setName(rs.getString("name"));			
+				badge.setPointsValue(rs.getLong("points_value"));				
+				badge.setDescription(rs.getString("description"));				
 				
 				//preenchendo objeto user pela procura pelo seu id
-				UserDAO userDAO = new UserDAO();
-				
-				User user = userDAO.searchById(rs.getLong("id_user"));
-				
-				badge.setUser(user);
-				
-			}
-						
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
+				UserDAO userDAO = new UserDAO();				
+				User user = userDAO.searchById(rs.getLong("id_user"));				
+				badge.setUser(user);				
+			}						
+		} catch (SQLException e) {			
+			e.printStackTrace();			
 		} finally {
 			
 			//fechar conexao
@@ -212,8 +163,7 @@ public class BadgeDAO {
 		}
 		
 		return badge;
-	}
-	
+	}	
 	
 	//metodo buscar todos
 	public List<Badge> searchAll() {
@@ -227,56 +177,40 @@ public class BadgeDAO {
 		//buscando no bd
 		String sql = "SELECT * FROM badge;";
 		
-		try {
-			
-			PreparedStatement st = connection.getConnection().prepareStatement(sql);
-			
+		try {			
+			PreparedStatement st = connection.getConnection().prepareStatement(sql);			
 			ResultSet rs = st.executeQuery();
 			
 			//converter o resultSet em um objeto Badge
 			//next pula de linha em linha para ver se ela existe
-			while (rs.next()) {
-				
+			while (rs.next()) {				
 				Badge badge = new Badge();
 				
 				//atribuindo colunas do rs a atributos do user
-				badge.setIdBadge(rs.getLong("id_badge"));
-				
-				badge.setName(rs.getString("name"));
-				
-				badge.setPointsValue(rs.getLong("points_value"));
-				
-				badge.setDescription(rs.getString("description"));
-				
+				badge.setIdBadge(rs.getLong("id_badge"));				
+				badge.setName(rs.getString("name"));			
+				badge.setPointsValue(rs.getLong("points_value"));				
+				badge.setDescription(rs.getString("description"));				
 				
 				//preenchendo objeto user pela procura pelo seu id
-				UserDAO userDAO = new UserDAO();
-				
-				User user = userDAO.searchById(rs.getLong("id_user"));
-				
+				UserDAO userDAO = new UserDAO();				
+				User user = userDAO.searchById(rs.getLong("id_user"));				
 				badge.setUser(user);
-				
-				
+								
 				//adicionando badge na lista
-				listBadge.add(badge);
-				
+				listBadge.add(badge);				
 			}
 			
 		} catch (SQLException e) {
-
-			e.printStackTrace();
-			
+			e.printStackTrace();			
 		} finally {
 			
 			//fechar conexao
-			this.connection.closeConnection();
-			
+			this.connection.closeConnection();			
 		}
 		
 		return listBadge;
-	}
-	
-
+	}	
 	
 	// buscar id do badge pelo seu nome
 	public long searchIdByBadgeName(String badgename) {
@@ -290,8 +224,7 @@ public class BadgeDAO {
 		//buscando no bd
 		String sql = "SELECT * FROM badge WHERE name = ?;";
 		
-		try {
-			
+		try {			
 			PreparedStatement st = connection.getConnection().prepareStatement(sql);
 			
 			//substituindo interrogacoes
@@ -300,16 +233,11 @@ public class BadgeDAO {
 			ResultSet rs = st.executeQuery();
 			
 			//next pula de linha em linha para ver se ela existe
-			if (rs.next() == true) {
-				
-				id = rs.getLong("id_badge");
-				
-			}
-						
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
+			if (rs.next() == true) {				
+				id = rs.getLong("id_badge");				
+			}						
+		} catch (SQLException e) {			
+			e.printStackTrace();			
 		} finally {
 			
 			//fechar conexao
@@ -319,7 +247,7 @@ public class BadgeDAO {
 		return id;
 	}
 	
-	
+	//buscar badges por id do usuario
 	public List<Badge> searchAllBadgesByUserId(long userid) {
 		
 		//abrir conexao
@@ -331,56 +259,38 @@ public class BadgeDAO {
 		//buscando no bd
 		String sql = "SELECT * FROM badge WHERE id_user = ?;";
 		
-		try {
-			
-			PreparedStatement st = connection.getConnection().prepareStatement(sql);
-			
-			st.setLong(1, userid);
-			
+		try {			
+			PreparedStatement st = connection.getConnection().prepareStatement(sql);			
+			st.setLong(1, userid);			
 			ResultSet rs = st.executeQuery();
 			
 			//converter o resultSet em um objeto Badge
 			//next pula de linha em linha para ver se ela existe
-			while (rs.next()) {
-				
+			while (rs.next()) {				
 				Badge badge = new Badge();
 				
 				//atribuindo colunas do rs a atributos do user
-				badge.setIdBadge(rs.getLong("id_badge"));
-				
-				badge.setName(rs.getString("name"));
-				
-				badge.setPointsValue(rs.getLong("points_value"));
-				
-				badge.setDescription(rs.getString("description"));
-				
+				badge.setIdBadge(rs.getLong("id_badge"));				
+				badge.setName(rs.getString("name"));				
+				badge.setPointsValue(rs.getLong("points_value"));				
+				badge.setDescription(rs.getString("description"));				
 				
 				//preenchendo objeto user pela procura pelo seu id
-				UserDAO userDAO = new UserDAO();
-				
-				User user = userDAO.searchById(rs.getLong("id_user"));
-				
-				badge.setUser(user);
-				
+				UserDAO userDAO = new UserDAO();				
+				User user = userDAO.searchById(rs.getLong("id_user"));				
+				badge.setUser(user);				
 				
 				//adicionando badge na lista
-				listBadge.add(badge);
-				
-			}
-			
+				listBadge.add(badge);				
+			}			
 		} catch (SQLException e) {
-
-			e.printStackTrace();
-			
+			e.printStackTrace();			
 		} finally {
 			
 			//fechar conexao
-			this.connection.closeConnection();
-			
+			this.connection.closeConnection();			
 		}
 		
 		return listBadge;
 	}
-
-	
 }
