@@ -1,81 +1,46 @@
 package entities;
 
-
-
 public class Friend {
 
-	private Long idFriend;
-	
-	private String name;
-	
-	private Long fpoints;
-	
-	private String picture;
-	
-	private Long score15;
-	
-	private Long score30;
-	
-	private Long score60;
-	
-	private Long pos15;
-	
-	private Long pos30;
-	
+	private Long idFriend;	
+	private String name;	
+	private Long fpoints;	
+	private String picture;	
+	private Long score15;	
+	private Long score30;	
+	private Long score60;	
+	private Long pos15;	
+	private Long pos30;	
 	private Long pos60;
-
-	
 	
 	// Construtor vazio
 	public Friend() {
-		this.idFriend = null;
-		
-		this.name = "";
-		
-		this.fpoints = null;
-		
-		this.picture = "";
-		
-		this.score15 = null;
-		
-		this.score30 = null;
-		
-		this.score60 = null;
-		
-		this.pos15 = null;
-		
-		this.pos30 = null;
-		
-		this.pos60 = null;
-				
-	}
-	
+		this.idFriend = null;		
+		this.name = "";		
+		this.fpoints = null;		
+		this.picture = "";		
+		this.score15 = null;		
+		this.score30 = null;		
+		this.score60 = null;		
+		this.pos15 = null;	
+		this.pos30 = null;		
+		this.pos60 = null;				
+	}	
 
 	// Construtor com parametro
 	public Friend(Long id_friend, String name, Long fpoints, String picture, Long score15, Long score30, Long score60,
 			Long pos15, Long pos30, Long pos60) {
-		this.idFriend = id_friend;
-		
-		this.name = name;
-		
-		this.fpoints = fpoints;
-		
+		this.idFriend = id_friend;		
+		this.name = name;		
+		this.fpoints = fpoints;		
 		this.picture = picture;
-		
-		this.score15 = score15;
-		
-		this.score30 = score30;
-		
-		this.score60 = score60;
-		
-		this.pos15 = pos15;
-		
-		this.pos30 = pos30;
-		
-		this.pos60 = pos60;
-				
+		this.score15 = score15;		
+		this.score30 = score30;		
+		this.score60 = score60;		
+		this.pos15 = pos15;		
+		this.pos30 = pos30;		
+		this.pos60 = pos60;				
 	}
-
 	
 	//metodo toString
 	@Override
@@ -84,7 +49,6 @@ public class Friend {
 				+ ", score15 = " + score15 + ", score30 = " + score30 + ", score60 = " + score60 + ", pos15 = " + pos15
 				+ ", pos30 = " + pos30 + ", pos60 = " + pos60 + "]";
 	}
-
 	
 	// getters e setters
 	public Long getIdFriend() {
@@ -166,6 +130,4 @@ public class Friend {
 	public void setPos60(Long pos60) {
 		this.pos60 = pos60;
 	}
-
-	
 }
