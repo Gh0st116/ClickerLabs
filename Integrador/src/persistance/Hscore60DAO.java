@@ -11,18 +11,12 @@ import entities.Hscore60;
 
 public class Hscore60DAO {
 
-	private ConnectionMySQL connection;
-	
-	
+	private ConnectionMySQL connection;	
 	
 	//construtor da classe
-	public Hscore60DAO() {
-		
-		this.connection = new ConnectionMySQL(DBConfigs.IP, DBConfigs.PORT, DBConfigs.LOGIN, DBConfigs.PASSWORD, DBConfigs.NAME_DB);
-		
-	}
-	
-	
+	public Hscore60DAO() {		
+		this.connection = new ConnectionMySQL(DBConfigs.IP, DBConfigs.PORT, DBConfigs.LOGIN, DBConfigs.PASSWORD, DBConfigs.NAME_DB);		
+	}	
 	
 	//metodo adicionar
 	public Hscore60 add(Hscore60 hscore60) {
@@ -36,47 +30,35 @@ public class Hscore60DAO {
 		Hscore60 h60 = null;
 		
 		try {
-			
 			//preparedStatement prepara o comando do sql antes de executar
 			PreparedStatement st = this.connection.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
 			//substituindo interrogacoes
-			st.setString(1, hscore60.getPlayerName());
-			
+			st.setString(1, hscore60.getPlayerName());			
 			st.setDouble(2, hscore60.getPlayerScore());
-			
-			st.setDouble(3, hscore60.getTime());
-			
-			st.setDouble(4, hscore60.getAverageCps());
-			
+			st.setDouble(3, hscore60.getTime());			
+			st.setDouble(4, hscore60.getAverageCps());			
 			
 			ResultSet rs = st.getGeneratedKeys();
 			
-			if (rs.next()) {
-				
-				h60 = this.searchById(rs.getLong(1));
-				
+			if (rs.next()) {				
+				h60 = this.searchById(rs.getLong(1));				
 				System.out.println(h60.toString());
 			}
 			
 			//executando a sql
 			st.executeUpdate();
 			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		
+		} catch (SQLException e) {			
+			e.printStackTrace();		
 		} finally {
 		
 			//fechando conexao
 			this.connection.closeConnection();
 		}
 		
-		return h60;
-		
+		return h60;		
 	}
-	
-	
 	
 	//metodo editar
 	public void edit(Hscore60 hscore60) {
@@ -87,37 +69,27 @@ public class Hscore60DAO {
 		//editar no bd
 		String sql = "UPDATE hscore60 SET player_username = ?, player_score = ?, time = ?, average = ? WHERE id_60 = ?;"; 
 		
-		try {
-			
+		try {			
 			PreparedStatement st = connection.getConnection().prepareStatement(sql);
 			
 			//substituindo interrogacoes
-			st.setString(1, hscore60.getPlayerName());
-			
-			st.setDouble(2, hscore60.getPlayerScore());
-			
-			st.setDouble(3, hscore60.getTime());
-			
-			st.setDouble(4, hscore60.getAverageCps());
-			
+			st.setString(1, hscore60.getPlayerName());			
+			st.setDouble(2, hscore60.getPlayerScore());			
+			st.setDouble(3, hscore60.getTime());			
+			st.setDouble(4, hscore60.getAverageCps());			
 			st.setLong(5, hscore60.getId60());
 			
 			//executando sql
 			st.executeUpdate();
 			
 		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
+			e.printStackTrace();			
 		} finally {
 			
 			//fechando conexao
-			this.connection.closeConnection();
-			
-		}
-			
-	}
-	
+			this.connection.closeConnection();			
+		}			
+	}	
 	
 	//metodo excluir
 	public void delete(Hscore60 hscore60) {
@@ -128,8 +100,7 @@ public class Hscore60DAO {
 		//deletando do bd
 		String sql = "DELETE FROM hscore60 WHERE id_60 = ?";
 		
-		try {
-			
+		try {			
 			PreparedStatement st = connection.getConnection().prepareStatement(sql);
 			
 			//substituindo interrogacoes
@@ -139,19 +110,13 @@ public class Hscore60DAO {
 			st.executeUpdate();
 			
 		} catch (SQLException e) {
-
-			e.printStackTrace();
-			
+			e.printStackTrace();			
 		} finally {
 			
 			//fechando conexao
-			this.connection.closeConnection();
-			
-		}
-		
-	}
-	
-	
+			this.connection.closeConnection();			
+		}		
+	}	
 	
 	//metodo buscar por ID
 	public Hscore60 searchById(long id60) {
@@ -165,8 +130,7 @@ public class Hscore60DAO {
 		//buscando no bd
 		String sql = "SELECT * FROM hscore60 WHERE id_60 = ?;";
 		
-		try {
-			
+		try {			
 			PreparedStatement st = connection.getConnection().prepareStatement(sql);
 			
 			//substituindo interrogacoes
@@ -176,27 +140,18 @@ public class Hscore60DAO {
 			
 			//converter o resultSet em um ubjeto Hscore60
 			//next pula de linha em linha para ver se ela existe
-			if (rs.next() == true) {
-				
+			if (rs.next() == true) {				
 				hscore60 = new Hscore60();
 				
 				//atribuindo colunas do rs a atributos do hscore60
-				hscore60.setId60(rs.getLong("id_60"));
-				
-				hscore60.setPlayerName(rs.getString("player_username"));
-				
-				hscore60.setPlayerScore(rs.getLong("player_score"));
-				
-				hscore60.setTime(rs.getDouble("time"));
-				
-				hscore60.setAverageCps(rs.getDouble("average"));
-				
+				hscore60.setId60(rs.getLong("id_60"));				
+				hscore60.setPlayerName(rs.getString("player_username"));				
+				hscore60.setPlayerScore(rs.getLong("player_score"));				
+				hscore60.setTime(rs.getDouble("time"));				
+				hscore60.setAverageCps(rs.getDouble("average"));				
 			}
-						
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
+		} catch (SQLException e) {			
+			e.printStackTrace();			
 		} finally {
 			
 			//fechar conexao
@@ -205,8 +160,7 @@ public class Hscore60DAO {
 		
 		return hscore60;
 	}
-	
-	
+		
 	//metodo buscar todos
 	public List<Hscore60> searchAll() {
 		
@@ -219,48 +173,35 @@ public class Hscore60DAO {
 		//buscando no bd
 		String sql = "SELECT * FROM hscore60;";
 		
-		try {
-			
-			PreparedStatement st = connection.getConnection().prepareStatement(sql);
-			
+		try {			
+			PreparedStatement st = connection.getConnection().prepareStatement(sql);			
 			ResultSet rs = st.executeQuery();
 			
 			//converter o resultSet em um objeto Hscore60
 			//next pula de linha em linha para ver se ela existe
-			while (rs.next()) {
-				
+			while (rs.next()) {				
 				Hscore60 hscore60 = new Hscore60();
 				
 				//atribuindo colunas do rs a atributos do hscore60
-				hscore60.setId60(rs.getLong("id_60"));
-				
-				hscore60.setPlayerName(rs.getString("player_username"));
-				
-				hscore60.setPlayerScore(rs.getLong("player_score"));
-				
-				hscore60.setTime(rs.getDouble("time"));
-				
+				hscore60.setId60(rs.getLong("id_60"));				
+				hscore60.setPlayerName(rs.getString("player_username"));				
+				hscore60.setPlayerScore(rs.getLong("player_score"));				
+				hscore60.setTime(rs.getDouble("time"));				
 				hscore60.setAverageCps(rs.getDouble("average"));
 				
 				//adicionando user na lista
-				list60.add(hscore60);
-				
-			}
-			
+				list60.add(hscore60);				
+			}			
 		} catch (SQLException e) {
-
-			e.printStackTrace();
-			
+			e.printStackTrace();			
 		} finally {
 			
 			//fechar conexao
-			this.connection.closeConnection();
-			
+			this.connection.closeConnection();			
 		}
 		
 		return list60;
 	}
-
 	
 	// procurando id pelo username
 	public long searchIdByUsername(String username) {
@@ -274,8 +215,7 @@ public class Hscore60DAO {
 		//buscando no bd
 		String sql = "SELECT id_60 FROM hscore60 WHERE player_username = ?;";
 		
-		try {
-			
+		try {			
 			PreparedStatement st = connection.getConnection().prepareStatement(sql);
 			
 			//substituindo interrogacoes
@@ -283,19 +223,15 @@ public class Hscore60DAO {
 			
 			ResultSet rs = st.executeQuery();
 			
-			//converter o resultSet em um ubjeto Hscore15
+			//converter o resultSet em um objeto Hscore15
 			//next pula de linha em linha para ver se ela existe
 			if (rs.next() == true) {
 						
 				//atribuindo colunas do rs a atributos do hscore15
-				id = rs.getLong("id_60");
-				
-			}
-						
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
+				id = rs.getLong("id_60");				
+			}						
+		} catch (SQLException e) {			
+			e.printStackTrace();			
 		} finally {
 			
 			//fechar conexao
@@ -304,6 +240,4 @@ public class Hscore60DAO {
 		
 		return id;
 	}
-
-	
 }
