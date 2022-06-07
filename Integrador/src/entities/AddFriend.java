@@ -15,8 +15,6 @@ public class AddFriend {
 	// relacionamento 1:N com Friend
 	private Friend friend;
 
-
-
 	// construtor vazio
 	public AddFriend() {
 		this.idAddFriend = null;
@@ -24,7 +22,6 @@ public class AddFriend {
 		this.user = new User();
 		this.friend = new Friend();
 	}
-
 	
 	// construtor com parametros
 	public AddFriend(Long idAddFriend, LocalDateTime addDate, User user, Friend friend) {
@@ -40,7 +37,6 @@ public class AddFriend {
 		return "AddFriend [idAddFriend = " + idAddFriend + ", addDate = " + addDate + ", user = " + user + ", friend = "
 				+ friend + "]";
 	}
-
 	
 	// getters e setters
 	public Long getIdAddFriend() {
@@ -73,7 +69,5 @@ public class AddFriend {
 
 	public void setFriend(Friend friend) {
 		this.friend = friend;
-	}
-
-	
+	}	
 }
