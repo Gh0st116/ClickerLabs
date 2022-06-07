@@ -8,47 +8,32 @@ public class Badge {
 	private String description;
 	
 	// relacionamento 1:N com User
-	private User user;
-	
-	
+	private User user;	
 
 	// Construtor vazio
 	public Badge() {
-		this.idBadge = null;
-		
-		this.pointsValue = null;
-		
-		this.name = "";
-		
-		this.description = "";
-		
-		this.user = null;
-		
+		this.idBadge = null;		
+		this.pointsValue = null;		
+		this.name = "";		
+		this.description = "";		
+		this.user = null;		
 	}
-
 	
 	// Construtor com parametros
 	public Badge(Long id_badge, Long pointsValue, String name, String description, User user) {
 		this.idBadge = id_badge;
-		
-		this.pointsValue = pointsValue;
-		
-		this.name = name;
-		
-		this.description = description;
-		
-		this.user = user;
-		
+		this.pointsValue = pointsValue;		
+		this.name = name;		
+		this.description = description;		
+		this.user = user;		
 	}
-
 	
 	// metodo toString
 	@Override
 	public String toString() {
 		return "Badge [idBadge = " + idBadge + ", pointsValue = " + pointsValue + ", name = " + name + ", description = "
 				+ description + ", user = " + user + "]";
-	}
-	
+	}	
 
 	// getters e setters
 	public Long getIdBadge() {
@@ -89,7 +74,5 @@ public class Badge {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	
+	}	
 }
