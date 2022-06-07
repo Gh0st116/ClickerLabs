@@ -15,24 +15,17 @@ import entities.Friend;
 import entities.User;
 
 public class AddFriendDAO {
-
 	
 	private ConnectionMySQL connection;
 	
-	
-	
 	//construtor da classe
-	public AddFriendDAO() {
-		
-		this.connection = new ConnectionMySQL(DBConfigs.IP, DBConfigs.PORT, DBConfigs.LOGIN, DBConfigs.PASSWORD, DBConfigs.NAME_DB);
-		
-	}
-	
-
+	public AddFriendDAO() {		
+		this.connection = new ConnectionMySQL(DBConfigs.IP, DBConfigs.PORT, DBConfigs.LOGIN, DBConfigs.PASSWORD, DBConfigs.NAME_DB);		
+	}	
 	
 	//metodo adicionar
 	public AddFriend add(AddFriend addFriend) {
-
+		
 		//abrindo conexao
 		this.connection.openConnection();
 		
@@ -41,51 +34,38 @@ public class AddFriendDAO {
 		
 		AddFriend af = null;
 		
-		try {
-			
+		try {			
 			//preparedStatement prepara o comando do sql antes de executar
 			PreparedStatement st = this.connection.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
 			//substituindo interrogacoes			
-			st.setLong(1, addFriend.getFriend().getIdFriend());
-			
-			st.setLong(2, addFriend.getUser().getIdUser());
-			
+			st.setLong(1, addFriend.getFriend().getIdFriend());			
+			st.setLong(2, addFriend.getUser().getIdUser());			
 			
 			//convertendo LocalDateTime em java.sql.Date e em DateTime do bd
 			Date add_date = Date.valueOf(addFriend.getAddDate().toLocalDate());
 			
-			st.setDate(3, add_date);
-			
-			
+			st.setDate(3, add_date);			
 			ResultSet rs = st.getGeneratedKeys();
 			
-			if (rs.next()) {
-				
-				af = this.searchById(rs.getLong(1));
-				
+			if (rs.next()) {				
+				af = this.searchById(rs.getLong(1));				
 				System.out.println(af.toString());
-			}
-			
+			}			
 			
 			//executando a sql
 			st.executeUpdate();
 			
-		} catch (SQLException e) {
+		} catch (SQLException e) {			
+			e.printStackTrace();		
+		} finally {		
 			
-			e.printStackTrace();
-		
-		} finally {
-		
 			//fechando conexao
 			this.connection.closeConnection();
 		}
 		
-		return af;
-		
+		return af;		
 	}
-	
-	
 	
 	//metodo editar
 	public void edit(AddFriend addFriend) {
@@ -96,41 +76,29 @@ public class AddFriendDAO {
 		//editar no bd
 		String sql = "UPDATE add_friend SET id_friend = ?, id_user = ?, add_date = ? WHERE id_add_friend = ?;"; 
 		
-		try {
-			
+		try {			
 			PreparedStatement st = connection.getConnection().prepareStatement(sql);
 			
 			//substituindo interrogacoes		
-			st.setLong(1, addFriend.getFriend().getIdFriend());
-			
-			st.setLong(2, addFriend.getUser().getIdUser());
-			
+			st.setLong(1, addFriend.getFriend().getIdFriend());			
+			st.setLong(2, addFriend.getUser().getIdUser());			
 			
 			//convertendo LocalDateTime em java.sql.Date e em DateTime do bd
-			Date add_date = Date.valueOf(addFriend.getAddDate().toLocalDate());
-			
-			st.setDate(3, add_date);
-			
-			
-			st.setLong(4, addFriend.getIdAddFriend());
-			
+			Date add_date = Date.valueOf(addFriend.getAddDate().toLocalDate());			
+			st.setDate(3, add_date);			
+			st.setLong(4, addFriend.getIdAddFriend());			
 			
 			//executando sql
-			st.executeUpdate();
+			st.executeUpdate();	
 			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
-		} finally {
+		} catch (SQLException e) {			
+			e.printStackTrace();			
+		} finally {	
 			
 			//fechando conexao
-			this.connection.closeConnection();
-			
-		}
-			
-	}
-	
+			this.connection.closeConnection();			
+		}			
+	}	
 	
 	//metodo excluir
 	public void delete(AddFriend addFriend) {
@@ -141,8 +109,7 @@ public class AddFriendDAO {
 		//deletando do bd
 		String sql = "DELETE FROM add_friend WHERE id_add_friend = ?";
 		
-		try {
-			
+		try {			
 			PreparedStatement st = connection.getConnection().prepareStatement(sql);
 			
 			//substituindo interrogacoes
@@ -152,19 +119,13 @@ public class AddFriendDAO {
 			st.executeUpdate();
 			
 		} catch (SQLException e) {
-
-			e.printStackTrace();
-			
+			e.printStackTrace();			
 		} finally {
 			
 			//fechando conexao
-			this.connection.closeConnection();
-			
-		}
-		
-	}
-	
-	
+			this.connection.closeConnection();			
+		}		
+	}	
 	
 	//metodo buscar por ID
 	public AddFriend searchById(Long idAddFriend) {
@@ -178,62 +139,44 @@ public class AddFriendDAO {
 		//buscando no bd
 		String sql = "SELECT * FROM add_friend WHERE id_add_friend = ?;";
 		
-		try {
-			
+		try {			
 			PreparedStatement st = connection.getConnection().prepareStatement(sql);
 			
 			//substituindo interrogacoes
-			st.setLong(1, idAddFriend);
-			
+			st.setLong(1, idAddFriend);			
 			ResultSet rs = st.executeQuery();
 			
 			//converter o resultSet em um ubjeto addFriend
 			//next pula de linha em linha para ver se ela existe
-			if (rs.next() == true) {
-				
+			if (rs.next() == true) {				
 				addFriend = new AddFriend();
 				
 				//atribuindo colunas do rs a atributos do addFriend
-				addFriend.setIdAddFriend(rs.getLong("id_add_friend"));
-				
+				addFriend.setIdAddFriend(rs.getLong("id_add_friend"));				
 				
 				//preenchendo colunas id_friend e id_user procurando seus IDs  
-				FriendDAO friendDAO = new FriendDAO();
+				FriendDAO friendDAO = new FriendDAO();				
+				Friend friend = friendDAO.searchById(rs.getLong("id_friend"));				
+				addFriend.setFriend(friend);				
 				
-				Friend friend = friendDAO.searchById(rs.getLong("id_friend"));
-				
-				addFriend.setFriend(friend);
-				
-				
-				UserDAO userDAO = new UserDAO();
-				
+				UserDAO userDAO = new UserDAO();				
 				User user = userDAO.searchById(rs.getLong("id_user"));
-				
 				addFriend.setUser(user);
-				
-				
-				//convertendo DateTime pra Date pra LocalDateTime 
-				LocalDateTime addDateTime = rs.getDate("add_date").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-				
-				addFriend.setAddDate(addDateTime);
-				
 								
-			}
-						
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
+				//convertendo DateTime pra Date pra LocalDateTime 
+				LocalDateTime addDateTime = rs.getDate("add_date").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();				
+				addFriend.setAddDate(addDateTime);								
+			}						
+		} catch (SQLException e) {			
+			e.printStackTrace();			
 		} finally {
 			
 			//fechar conexao
 			this.connection.closeConnection();
-		}
-		
+		}		
 		return addFriend;
 	}
-	
-	
+		
 	//metodo buscar todos
 	public List<AddFriend> searchAll() {
 		
@@ -246,10 +189,8 @@ public class AddFriendDAO {
 		//buscando no bd
 		String sql = "SELECT * FROM add_friend;";
 		
-		try {
-			
-			PreparedStatement st = connection.getConnection().prepareStatement(sql);
-			
+		try {			
+			PreparedStatement st = connection.getConnection().prepareStatement(sql);			
 			ResultSet rs = st.executeQuery();
 			
 			//converter o resultSet em um objeto addFriend
@@ -263,44 +204,28 @@ public class AddFriendDAO {
 				
 				
 				//preenchendo colunas id_friend e id_user procurando seus IDs  
-				FriendDAO friendDAO = new FriendDAO();
+				FriendDAO friendDAO = new FriendDAO();				
+				Friend friend = friendDAO.searchById(rs.getLong("id_friend"));				
+				addFriend.setFriend(friend);				
 				
-				Friend friend = friendDAO.searchById(rs.getLong("id_friend"));
-				
-				addFriend.setFriend(friend);
-				
-				
-				UserDAO userDAO = new UserDAO();
-				
-				User user = userDAO.searchById(rs.getLong("id_user"));
-				
+				UserDAO userDAO = new UserDAO();				
+				User user = userDAO.searchById(rs.getLong("id_user"));				
 				addFriend.setUser(user);
 				
-				
 				//convertendo DateTime pra Date pra LocalDateTime 
-				LocalDateTime addDateTime = rs.getDate("add_date").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-				
+				LocalDateTime addDateTime = rs.getDate("add_date").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();				
 				addFriend.setAddDate(addDateTime);
-				
-								
+												
 				//adicionando addFriend na lista
-				listAddFriend.add(addFriend);
-				
-			}
-			
+				listAddFriend.add(addFriend);				
+			}			
 		} catch (SQLException e) {
-
-			e.printStackTrace();
-			
+			e.printStackTrace();			
 		} finally {
 			
 			//fechar conexao
-			this.connection.closeConnection();
-			
-		}
-		
+			this.connection.closeConnection();			
+		}		
 		return listAddFriend;
 	}
-	
-	
 }
